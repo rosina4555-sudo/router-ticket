@@ -1,6 +1,7 @@
 <script setup>
 import { RouterView, RouterLink, useRoute } from 'vue-router'
 import { useStorefrontStore } from '../stores/storefront'
+import StorefrontFooter from '../components/storefront/StorefrontFooter.vue'
 import { onMounted } from 'vue'
 
 const route = useRoute()
@@ -12,7 +13,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-cloud-white">
+  <div class="min-h-screen bg-cloud-white flex flex-col">
     <!-- Top bar -->
     <header class="bg-white border-b border-slate/20 px-4 py-3 sm:px-6">
       <div class="max-w-lg mx-auto flex items-center justify-between">
@@ -36,8 +37,11 @@ onMounted(() => {
     </header>
 
     <!-- Page content -->
-    <main class="max-w-lg mx-auto px-4 py-6 sm:px-6">
+    <main class="max-w-lg mx-auto px-4 py-6 sm:px-6 flex-1 w-full">
       <RouterView />
     </main>
+
+    <!-- Footer -->
+    <StorefrontFooter />
   </div>
 </template>
