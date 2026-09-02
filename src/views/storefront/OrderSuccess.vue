@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
@@ -7,6 +7,24 @@ const router = useRouter()
 
 const voucherCode = computed(() => route.query.code || 'RTK-XXXX-XXXX')
 const planName = computed(() => route.query.plan || 'your plan')
+
+const copied = ref(false)
+
+async function copyCode() {
+  try {
+    await navigator.clipboard.writeText(voucherCode.value)
+    copied.value = true
+    setTimeout(() => { copied.value = false }, 2000)
+  } catch {
+    // Fallback for older browsers
+    const el = document.createElement('textarea')
+    el.value = voucherCode.value
+    el.select()
+    document.execCommand('copy')
+    copied.value = true
+    setTimeout(() => { copied.value = false }, 2000)
+  }
+}
 </script>
 
 <template>
@@ -29,6 +47,27 @@ const planName = computed(() => route.query.plan || 'your plan')
       <p class="font-mono text-2xl font-semibold text-signal-teal tracking-wider">
         {{ voucherCode }}
       </p>
+
+      <!-- Copy button -->
+      <button
+        @click="copyCode"
+        :class="[
+          'inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium font-body transition-all',
+          copied
+            ? 'bg-signal-teal/15 text-signal-teal'
+            : 'bg-cloud-white border border-slate/15 text-slate hover:text-ink-navy hover:border-slate/30',
+        ]"
+      >
+        <svg v-if="!copied" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="9" width="13" height="13" rx="2" />
+          <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+        </svg>
+        <svg v-else class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+        {{ copied ? 'Copied!' : 'Copy code' }}
+      </button>
+
       <p class="text-xs text-slate font-body">
         Enter this code on your MikroTik hotspot login page
       </p>
