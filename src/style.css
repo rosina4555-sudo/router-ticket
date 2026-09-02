@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/* ─── RouterTicket Design Tokens ─── */
+@theme {
+  /* Colors — from brief */
+  --color-ink-navy: #12172B;
+  --color-indigo-deep: #232C56;
+  --color-signal-teal: #14B8A6;
+  --color-ticket-amber: #F0A202;
+  --color-cloud-white: #F8F9FB;
+  --color-slate: #5B6478;
+
+  /* Semantic aliases */
+  --color-dashboard-bg: #12172B;
+  --color-dashboard-panel: #232C56;
+  --color-dashboard-card: #1c2340;
+  --color-storefront-bg: #F8F9FB;
+  --color-primary: #14B8A6;
+  --color-secondary: #F0A202;
+  --color-muted: #5B6478;
+
+  /* Font families */
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-body: "General Sans", "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+/* ─── Global resets & base ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background: var(--color-cloud-white);
+  color: var(--color-ink-navy);
+}
+
+/* Tabular figures for numeric columns */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Tear-line / perforation motif */
+.tear-divider {
+  border: none;
+  border-top: 2px dashed var(--color-slate);
+  opacity: 0.4;
+}
+
+/* Scrollbar styling for dark dashboard */
+.dark ::-webkit-scrollbar {
+  width: 6px;
+}
+.dark ::-webkit-scrollbar-track {
+  background: var(--color-ink-navy);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-indigo-deep);
+  border-radius: 3px;
+}
