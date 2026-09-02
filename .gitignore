@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Internal docs (not published)
+TRACKING.md
+routerticket-design-brief.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
